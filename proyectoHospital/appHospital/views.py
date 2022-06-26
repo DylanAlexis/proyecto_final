@@ -10,7 +10,7 @@ def hospital(request):
     return render(request, 'hospital.html', {'hospital' : hospital_list})
 
 def profesional(request):
-    pprofesional_list = Profesional.objects.all()
+    profesional_list = Profesional.objects.all()
     return render(request, 'profesional.html', {'profesional' : profesional_list})
 
 def especialidad(request):
