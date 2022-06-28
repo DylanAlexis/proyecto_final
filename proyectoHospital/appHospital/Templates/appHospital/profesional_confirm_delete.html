@@ -1,0 +1,10 @@
+{% extends 'appHospital/Padre.html' %}
+{% load static %}
+{% block topPage %}
+<a class="navbar-brand" href=" {% url 'index' %}"><img src="assets/img/navbar-logo.svg" alt="..." /></a>
+{% endblock %}
+{% block changingContent %}
+<form method="POST">{% csrf_token %}
+    ¿Estás seguro de eliminar al profesional "{{object}}"?
+<input type="submit" value="SÍ">
+{% endblock %}

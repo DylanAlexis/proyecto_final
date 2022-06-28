@@ -28,4 +28,9 @@ urlpatterns = [
     path('profesionalBuscarResultado/', profesionalBuscarResultado, name='ProfesionalBuscarResultado'),
     path('profesionalEliminar/<apellido>', profesionalEliminar, name='ProfesionalEliminar'),
     path('profesionalEditar/<matrícula>', profesionalEditar, name='ProfesionalEditar'),
+    path('profesional/list/', ProfesionalList.as_view(), name='ProfesionalList'),
+    path('profesional/<pk>', ProfesionalDetalle.as_view(), name='ProfesionalDetalle'),
+    path('profesional/nuevo/', ProfesionalCrear.as_view(), name='ProfesionalCrear'),
+    path('profesional/edicion/<pk>', ProfesionalEdicion.as_view(), name='ProfesionalEdicion'),
+    path('profesional/borrar/<pk>', ProfesionalEliminar.as_view(), name='ProfesionalEliminar'),
 ]

@@ -1,0 +1,16 @@
+{% extends 'appHospital/Padre.html' %}
+{% load static %}
+{% block topPage %}
+<a class="navbar-brand" href=" {% url 'index' %}"><img src="assets/img/navbar-logo.svg" alt="..." /></a>
+{% endblock %}
+{% block changingContent %}
+<p>Nombre: {{profesional.nombre+profesional.apellido}}</p>
+<p>Edad: {{profesional.edad}}</p>
+<p>Matrícula: {{profesional.matrícula}}</p>
+<p>Especialidad: {{profesional.especialidad}}</p>
+<p>Hospital: {{profesional.hospital}}</p>
+<br>
+<p>
+    <a href="{% url 'ProfesionalList' %}">Volver</a>
+</p>
+{% endblock %}

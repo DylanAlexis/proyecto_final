@@ -1,9 +1,12 @@
-from re import M
+from msilib.schema import ListView
+from re import M, template
 import re
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from .models import *
 from .forms import *
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 def index(request):
     return render(request, 'index.html')
@@ -80,3 +83,26 @@ def profesionalEditar(request, matrícula):
         miFormulario = ProfesionalEditar(initial={'nombre': profesional.nombre, 'apellido': profesional.apellido, 'edad': profesional.edad, 'email': profesional.email})
         contexto = {'miFormulario':miFormulario, 'matrícula':matrícula}
         return render(request, 'profesionalEditar.html', contexto)
+
+class ProfesionalList(ListView):
+    model = Profesional
+    template_name = 'profesional.html'
+
+class ProfesionalDetalle(DetailView):
+    model = Profesional
+    success_url = reverse_lazy('profesionalList')
+    fields = ['nombre', 'apellido', 'edad', 'matrícula', 'especialidad', 'hospital']
+
+class ProfesionalCrear(CreateView):
+    model = Profesional
+    success_url = reverse_lazy('profesionalList')
+    fields = ['nombre', 'apellido', 'edad', 'email', 'matrícula', 'especialidad', 'hospital']
+
+class ProfesionalEdicion(UpdateView):
+    model = Profesional
+    success_url = reverse_lazy('profesionalList')
+    fields = ['nombre', 'apellido', 'edad', 'email', 'matrícula', 'especialidad', 'hospital']
+
+class ProfesionalEliminar(DeleteView):
+    model = Profesional
+    success_url = reverse_lazy('profesionalList')
