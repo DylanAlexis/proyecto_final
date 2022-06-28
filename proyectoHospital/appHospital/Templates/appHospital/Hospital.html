@@ -3,3 +3,8 @@
 {% block topPage %}
 <a class="navbar-brand" href=" {% url 'index' %}"><img src="assets/img/navbar-logo.svg" alt="..." /></a>
 {% endblock %}
+{% block changingContent %}
+{% for hospital in hospitales %}
+    <li>{{hospital}}</li>
+{% endfor %}
+{% endblock %}

@@ -3,3 +3,12 @@
 {% block topPage %}
 <a class="navbar-brand" href=" {% url 'index' %}"><img src="assets/img/navbar-logo.svg" alt="..." /></a>
 {% endblock %}
+{% block changingContent %}
+{% for profesional in profesionales %}
+    <li>{{profesional}}</li>
+    <button>
+        <a href="{% url 'ProfesionalEliminar' profesional.apellido %}">Eliminar</a>
+        <a href="{% url 'ProfesionalEditar' profesional.matrícula %}">Editar</a>
+    </button>
+{% endfor %}
+{% endblock %}

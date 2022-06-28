@@ -20,7 +20,12 @@ from appHospital.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
-    path('Hospital', hospital, name='hospital'),
-    path('Profesional', profesional, name='profesional'),
-    path('Especialidad', especialidad, name='especialidad'),
+    path('hospital/', hospitalLeer, name='Hospital'),
+    path('profesional/', profesionalLeer, name='Profesional'),
+    path('especialidad/', especialidad, name='Especialidad'),
+    path('especialidadAgregar/', especialidadAgregar, name='EspecialidadAgregar'),
+    path('profesionalBuscar/', profesionalBuscar, name='ProfesionalBuscar'),
+    path('profesionalBuscarResultado/', profesionalBuscarResultado, name='ProfesionalBuscarResultado'),
+    path('profesionalEliminar/<apellido>', profesionalEliminar, name='ProfesionalEliminar'),
+    path('profesionalEditar/<matrícula>', profesionalEditar, name='ProfesionalEditar'),
 ]
