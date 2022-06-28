@@ -1,0 +1,15 @@
+{% extends 'appHospital/Padre.html' %}
+{% load static %}
+{% block topPage %}
+<a class="navbar-brand" href=" {% url 'index' %}"><img src="assets/img/navbar-logo.svg" alt="..." /></a>
+{% endblock %}
+{% block changingContent %}
+{{especialidad}}
+{% if profesionales %}
+<ul>
+    {% for profesional in profesionales %}
+        <li>{{profesional.apellido}}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}

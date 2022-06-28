@@ -1,0 +1,13 @@
+{% extends 'appHospital/Padre.html' %}
+{% load static %}
+{% block topPage %}
+<a class="navbar-brand" href=" {% url 'index' %}"><img src="assets/img/navbar-logo.svg" alt="..." /></a>
+{% endblock %}
+{% block changingContent %}
+<form action="{% url 'ProfesionalEditar' matrícula %}" method="POST">{% csrf_token %}
+    <table>
+        {{miFormulario.as_table}}
+    </table>
+    <input type="submit" value="Editar">
+</form>
+{% endblock %}
