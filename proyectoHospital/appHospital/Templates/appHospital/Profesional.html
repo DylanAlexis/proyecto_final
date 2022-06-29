@@ -4,17 +4,17 @@
 <a class="navbar-brand" href=" {% url 'index' %}"><img src="assets/img/navbar-logo.svg" alt="..." /></a>
 {% endblock %}
 {% block changingContent %}
-{% for profesional in object_list %}
+{% for profesional in profesionales %}
 <li>{{profesional}}</li>
 <button>
-    <a href="% url 'profesional_detalle' profesional.id %">Información</a>
-    <a href="% url 'profesional_edicion' profesional.id %">Editar</a>
-    <a href="% url 'profesional_eliminar' profesional.id %">Eliminar</a>
+    <a href="{% url 'profesional_detalle' profesional.id %}">Información</a>
+    <a href="{% url 'profesional_edicion' profesional.id %}">Editar</a>
+    <a href="{% url 'profesional_eliminar' profesional.id %}">Eliminar</a>
 </button>
 {% endfor %}
 <br>
 <br>
 <button>
-    <a href="% url 'profesional_crear' %">Crearr</a>
+    <a href="{% url 'profesional_crear' %}">Crear</a>
 </button>
 {% endblock %}

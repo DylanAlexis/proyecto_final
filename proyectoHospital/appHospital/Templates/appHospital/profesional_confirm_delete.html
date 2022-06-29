@@ -5,7 +5,6 @@
 {% endblock %}
 {% block changingContent %}
 <form method="POST">{% csrf_token %}
-    ¿Estás seguro de eliminar al profesional "{{object}}"?
+    ¿Estás seguro de eliminar al profesional "{{object.nombre}} {{" "}} {{object.apellido}}"?
 <input type="submit" value="SÍ">
-{% endfor %}
 {% endblock %}
