@@ -1,3 +1,4 @@
+from collections import UserDict
 from msilib.schema import ListView
 from re import M, template
 import re
@@ -7,6 +8,8 @@ from django.urls import reverse_lazy
 from .models import *
 from .forms import *
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login, logout, authenticate
 
 def index(request):
     return render(request, 'index.html')
@@ -106,3 +109,34 @@ class ProfesionalEdicion(UpdateView):
 class ProfesionalEliminar(DeleteView):
     model = Profesional
     success_url = reverse_lazy('Profesional')
+
+def login_request(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, request.POST)
+        if form.is_valid():
+            usuario = form.cleaned_data.get('username')
+            contraseña = form.cleaned_data.get('password')
+            user = authenticate(username=usuario, password=contraseña)
+            if user is not None:
+                login(request,user)
+                return render(request, 'index.html', {'msg':f'Bienvenido de nuevo, {usuario}'})
+            else:
+                return render(request, 'index.html', {'msg':'El usuario o la contraseña son incorrectos'})
+        else:
+            return render(request, 'index.html', {'msg':'El usuario o la contraseña son incorrectos'})
+    else:
+        form  = AuthenticationForm()
+        return render(request, 'login.html', {'form': form})    
+
+def register_request(request):
+    if request.method == 'POST':
+        form = UserRegistrationForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            form.save()
+            return render(request, 'index.html', {'msg':f'Bienvenido/a {username}, te has registrado exitosamente!'})
+        else:
+            return render(request, 'index.html', {'msg':'Error: el usuario no ha podido ser creado'}) 
+    else:
+        form = UserRegistrationForm()
+    return render(request, 'register.html', {'form':form})
