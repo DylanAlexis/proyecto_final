@@ -90,19 +90,19 @@ class ProfesionalList(ListView):
 
 class ProfesionalDetalle(DetailView):
     model = Profesional
-    success_url = reverse_lazy('profesionalList')
+    success_url = reverse_lazy('profesional')
     fields = ['nombre', 'apellido', 'edad', 'matrícula', 'especialidad', 'hospital']
 
 class ProfesionalCrear(CreateView):
     model = Profesional
-    success_url = reverse_lazy('profesionalList')
+    success_url = reverse_lazy('profesional')
     fields = ['nombre', 'apellido', 'edad', 'email', 'matrícula', 'especialidad', 'hospital']
 
 class ProfesionalEdicion(UpdateView):
     model = Profesional
-    success_url = reverse_lazy('profesionalList')
+    success_url = reverse_lazy('profesional')
     fields = ['nombre', 'apellido', 'edad', 'email', 'matrícula', 'especialidad', 'hospital']
 
 class ProfesionalEliminar(DeleteView):
     model = Profesional
-    success_url = reverse_lazy('profesionalList')
+    success_url = reverse_lazy('profesional')

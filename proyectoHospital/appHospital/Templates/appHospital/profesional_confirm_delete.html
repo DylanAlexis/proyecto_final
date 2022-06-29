@@ -7,4 +7,5 @@
 <form method="POST">{% csrf_token %}
     ¿Estás seguro de eliminar al profesional "{{object}}"?
 <input type="submit" value="SÍ">
+{% endfor %}
 {% endblock %}

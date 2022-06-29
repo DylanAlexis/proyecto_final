@@ -4,13 +4,14 @@
 <a class="navbar-brand" href=" {% url 'index' %}"><img src="assets/img/navbar-logo.svg" alt="..." /></a>
 {% endblock %}
 {% block changingContent %}
-<p>Nombre: {{profesional.nombre+profesional.apellido}}</p>
+<p>Nombre: {{profesional.nombre}}</p>
+<p>Nombre: {{profesional.apellido}}</p>
 <p>Edad: {{profesional.edad}}</p>
 <p>Matrícula: {{profesional.matrícula}}</p>
 <p>Especialidad: {{profesional.especialidad}}</p>
 <p>Hospital: {{profesional.hospital}}</p>
 <br>
 <p>
-    <a href="{% url 'ProfesionalList' %}">Volver</a>
+    <a href="{% url 'Profesional_list' %}">Volver</a>
 </p>
 {% endblock %}
