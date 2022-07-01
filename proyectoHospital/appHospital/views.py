@@ -10,6 +10,8 @@ from .forms import *
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     return render(request, 'index.html')
@@ -87,25 +89,29 @@ def profesionalEditar(request, matrícula):
         contexto = {'miFormulario':miFormulario, 'matrícula':matrícula}
         return render(request, 'profesionalEditar.html', contexto)
 
-class ProfesionalList(ListView):
+class ProfesionalList(LoginRequiredMixin, ListView):
     model = Profesional
     template_name = 'profesional.html'
 
+@login_required
 class ProfesionalDetalle(DetailView):
     model = Profesional
     success_url = reverse_lazy('Profesional')
     fields = ['nombre', 'apellido', 'edad', 'matrícula', 'especialidad', 'hospital']
 
+@login_required
 class ProfesionalCrear(CreateView):
     model = Profesional
     success_url = reverse_lazy('Profesional')
     fields = ['nombre', 'apellido', 'edad', 'email', 'matrícula', 'especialidad', 'hospital']
 
+@login_required
 class ProfesionalEdicion(UpdateView):
     model = Profesional
     success_url = reverse_lazy('Profesional')
     fields = ['nombre', 'apellido', 'edad', 'email', 'matrícula', 'especialidad', 'hospital']
 
+@login_required
 class ProfesionalEliminar(DeleteView):
     model = Profesional
     success_url = reverse_lazy('Profesional')

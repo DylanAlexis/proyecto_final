@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from appHospital.views import *
+from django.contrib.auth.views import LogoutView
 
 
 urlpatterns = [
@@ -39,4 +40,5 @@ urlpatterns = [
 
     path('login/', login_request, name='login'),
     path('register/', register_request, name='register'),
+    path('logout/', LogoutView.as_view(template_name='logout.html'), name='logout'),
 ]
