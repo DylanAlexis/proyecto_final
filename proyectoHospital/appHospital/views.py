@@ -93,25 +93,22 @@ class ProfesionalList(LoginRequiredMixin, ListView):
     model = Profesional
     template_name = 'profesional.html'
 
-@login_required
+
 class ProfesionalDetalle(DetailView):
     model = Profesional
     success_url = reverse_lazy('Profesional')
     fields = ['nombre', 'apellido', 'edad', 'matrícula', 'especialidad', 'hospital']
 
-@login_required
 class ProfesionalCrear(CreateView):
     model = Profesional
     success_url = reverse_lazy('Profesional')
     fields = ['nombre', 'apellido', 'edad', 'email', 'matrícula', 'especialidad', 'hospital']
 
-@login_required
 class ProfesionalEdicion(UpdateView):
     model = Profesional
     success_url = reverse_lazy('Profesional')
     fields = ['nombre', 'apellido', 'edad', 'email', 'matrícula', 'especialidad', 'hospital']
 
-@login_required
 class ProfesionalEliminar(DeleteView):
     model = Profesional
     success_url = reverse_lazy('Profesional')
@@ -146,3 +143,18 @@ def register_request(request):
     else:
         form = UserRegistrationForm()
     return render(request, 'register.html', {'form':form})
+
+def editarPerfil(request):
+    usuario = request.user
+    if request.method == 'POST':
+        formulario = UserEditForm(request.POST, instance=usuario)
+        if formulario.is_valid():
+            informacion = formulario.cleaned_data
+            usuario.email = informacion['email']
+            usuario.password1 = informacion['password1']
+            usuario.password2 = informacion['password2']
+            usuario.save()
+            return render(request, 'index.html', {'msg': 'Datos actualizados'})
+    else:
+        formulario  = UserEditForm(instance=usuario)
+    return render(request, 'editarPerfil.html', {'formulario': formulario, 'usuario': usuario.username})

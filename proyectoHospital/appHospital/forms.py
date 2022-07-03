@@ -1,3 +1,4 @@
+from distutils.command.build_scripts import first_line_re
 import email
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
@@ -20,4 +21,16 @@ class UserRegistrationForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
+        help_texts = {k: "" for k in fields}
+
+class UserEditForm(UserCreationForm):
+    first_name = forms.CharField(label='Cambiar nombre', required=False)
+    last_name = forms.CharField(label='Cambiar apellido', required=False)
+    email = forms.EmailField(required=False)
+    password1 = forms.CharField(label='Nueva contraseña', widget=forms.PasswordInput(), required=False)
+    password2 = forms.CharField(label='Confirmar contraseña', widget=forms.PasswordInput(), required=False)  
+
+    class Meta:
+        model = User
+        fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
         help_texts = {k: "" for k in fields}

@@ -4,7 +4,10 @@
 <a class="navbar-brand" href=" {% url 'index' %}">H</a>
 {% endblock %}
 {% block changingContent %}
-<form method="POST">{% csrf_token %}
-    {{form.as_p}}
+<form action="{% url 'EditarPerfil' %}" method="POST">{% csrf_token %}
+    <table>
+    {{formulario.as_table}}
+    </table>
 <input type="submit" value="GUARDAR">
+</form>
 {% endblock %}
