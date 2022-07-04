@@ -14,8 +14,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from appHospital.views import *
+from django.urls import path, include
+from appHospital.views import (
+    Pagina, PaginaDetalle, ProfesionalCrear, ProfesionalDetalle, ProfesionalEdicion,
+    ProfesionalEliminar, ProfesionalList, editarPerfil, especialidad, especialidadAgregar,
+    hospitalLeer, index, login_request, profesionalBuscar, profesionalBuscarResultado, profesionalEditar,
+    profesionalEliminar, profesionalLeer, register_request
+)
 from django.contrib.auth.views import LogoutView
 
 
@@ -24,8 +29,7 @@ urlpatterns = [
     path('', index, name='index'),
     path('hospital/', hospitalLeer, name='Hospital'),
     path('especialidad/', especialidad, name='Especialidad'),
-    path('profesional/', profesionalLeer, name='Profesional')
-    ,
+    path('profesional/', profesionalLeer, name='Profesional'),
     path('especialidadAgregar/', especialidadAgregar, name='EspecialidadAgregar'),
     path('profesionalBuscar/', profesionalBuscar, name='ProfesionalBuscar'),
     path('profesionalBuscarResultado/', profesionalBuscarResultado, name='ProfesionalBuscarResultado'),
@@ -42,5 +46,8 @@ urlpatterns = [
     path('register/', register_request, name='register'),
     path('logout/', LogoutView.as_view(template_name='logout.html'), name='logout'),
     path('editarPerfil/', editarPerfil, name='EditarPerfil'),
+
+    path('paginas/', Pagina.as_view(), name='Paginas'),
+    path('paginas/<slug>/', PaginaDetalle.as_view(), name='pagina_detalle'),
 
 ]

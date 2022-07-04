@@ -1,17 +1,13 @@
-from collections import UserDict
 from msilib.schema import ListView
-from re import M, template
-import re
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from .models import *
-from .forms import *
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from .models import Blog, Especialidad, Hospital, Profesional
+from .forms import EspecialidadAgregar, ProfesionalEditar, UserEditForm, UserRegistrationForm
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.decorators import login_required
 
 def index(request):
     return render(request, 'index.html')
@@ -158,3 +154,21 @@ def editarPerfil(request):
     else:
         formulario  = UserEditForm(instance=usuario)
     return render(request, 'editarPerfil.html', {'formulario': formulario, 'usuario': usuario.username})
+
+class Pagina(TemplateView):
+    template_name = 'paginas.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['blogs'] = Blog.blogobjects.all()
+        return context
+
+class PaginaDetalle(DetailView):
+    model = Blog
+    template_name = 'pagina_detalle.html'
+    context_object_name = 'blog'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        blog = Blog.objects.filter(slug=self.kwargs.get('slug'))
+        return context

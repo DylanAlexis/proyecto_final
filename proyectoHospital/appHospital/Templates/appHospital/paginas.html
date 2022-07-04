@@ -1,0 +1,15 @@
+{% extends 'appHospital/Padre.html' %}
+{% load static %}
+{% block topPage %}
+<a class="navbar-brand" href=" {% url 'index' %}">H</a>
+{% endblock %}
+{% block changingContent %}
+{% for blog in blogs %}
+<a href="{% url 'pagina_detalle' slug=blog.slug %}">
+    <h2>{{blog.titulo}}</h2>
+</a>
+<p>{{blog.excerpt}}</p>
+<br>
+<br>
+{% endfor %}
+{% endblock %}
