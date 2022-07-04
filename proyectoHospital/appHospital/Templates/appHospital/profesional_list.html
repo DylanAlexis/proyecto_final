@@ -4,6 +4,9 @@
 <a class="navbar-brand" href=" {% url 'index' %}">H</a>
 {% endblock %}
 {% block changingContent %}
+{% block title %}
+<div class="masthead-subheading">Profesionales</div>
+{% endblock %}
 {% for profesional in object_list %}
 <li>{{profesional}}</li>
 <button>

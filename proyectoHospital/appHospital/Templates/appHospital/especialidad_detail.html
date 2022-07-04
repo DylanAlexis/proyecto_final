@@ -3,6 +3,9 @@
 {% block topPage %}
 <a class="navbar-brand" href=" {% url 'index' %}">H</a>
 {% endblock %}
+{% block title %}
+<div class="masthead-subheading">{{especialidad.nombre}}</div>
+{% endblock %}
 {% block changingContent %}
 <p>Especialidad: {{especialidad.nombre}}</p>
 <br>

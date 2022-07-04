@@ -3,8 +3,14 @@
 {% block topPage %}
 <a class="navbar-brand" href=" {% url 'index' %}">H</a>
 {% endblock %}
+{% block title %}
+<div class="masthead-subheading">{{blog.category}}</div>
+{% endblock %}
 {% block changingContent %}
 <h2>{{blog.titulo}}</h2>
+<h3>{{blog.subtitulo}}</h3>
+<h6>Autor: {{blog.autor}}</h4>
+<h6>Fecha: {{blog.publicado}}</h5>
 <p>{{blog.contenido}}</p>
 <br>
 <p>

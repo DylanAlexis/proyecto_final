@@ -2,6 +2,10 @@
 {% load static %}
 {% block topPage %}
 <a class="navbar-brand" href=" {% url 'index' %}">H</a>
+{% endblock %}
+{% block title %}
+<div class="masthead-subheading">Profesionales</div>
+{% endblock %}
 {% block changingContent %}
 {{especialidad}}
 {% if profesionales %}

@@ -16,9 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.contrib.auth.views import LogoutView
-from django.conf.urls import handler404
+from django.conf import settings
 from appHospital.views import (
-    Error404, Pagina, PaginaDetalle, HospitalDetalle, EspecialidadDetalle, ProfesionalCrear, ProfesionalDetalle, ProfesionalEdicion,
+    Pagina, PaginaDetalle, HospitalDetalle, EspecialidadDetalle, ProfesionalCrear, ProfesionalDetalle, ProfesionalEdicion,
     ProfesionalEliminar, ProfesionalList, editarPerfil, especialidadLeer, especialidadAgregar,
     hospitalLeer, index, about, login_request, profesionalBuscar, profesionalBuscarResultado, profesionalEditar,
     profesionalEliminar, profesionalLeer, register_request
@@ -56,4 +56,5 @@ urlpatterns = [
 
 ]
 
-handler404 = Error404.as_view()
+handler404 = "appHospital.views.page_not_found_view"
+handler500 = "appHospital.views.internal_server_error"

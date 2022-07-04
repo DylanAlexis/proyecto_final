@@ -3,12 +3,15 @@
 {% block topPage %}
 <a class="navbar-brand" href=" {% url 'index' %}">H</a>
 {% endblock %}
+{% block title %}
+<div class="masthead-subheading">Posts</div>
+{% endblock %}
 {% block changingContent %}
 {% for blog in blogs %}
-<a href="{% url 'pagina_detalle' slug=blog.slug %}">
-    <h2>{{blog.titulo}}</h2>
-</a>
+<h2>{{blog.titulo}}</h2>
 <p>{{blog.excerpt}}</p>
+<br>
+<a href="{% url 'pagina_detalle' slug=blog.slug %}">Leer más</a>
 <br>
 <br>
 {% endfor %}

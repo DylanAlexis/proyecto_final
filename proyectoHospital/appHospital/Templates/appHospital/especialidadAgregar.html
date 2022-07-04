@@ -3,8 +3,11 @@
 {% block topPage %}
 <a class="navbar-brand" href=" {% url 'index' %}">H</a>
 {% endblock %}
+{% block title %}
+<div class="masthead-subheading">Agregar especialidad</div>
+{% endblock %}
 {% block changingContent %}
-<form action="{% url 'especialidadAgregar' %}" method="POST">{% csrf_token %}
+<form action="{% url 'EspecialidadAgregar' %}" method="POST">{% csrf_token %}
     <table>
         {{miFormulario.as_table}}
     </table>

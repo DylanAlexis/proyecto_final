@@ -8,6 +8,8 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.decorators.cache import cache_control
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     return render(request, 'index.html')
@@ -191,5 +193,10 @@ class PaginaDetalle(DetailView):
         blog = Blog.objects.filter(slug=self.kwargs.get('slug'))
         return context
 
-class Error404(TemplateView):
-    template_name = '404.html'
+@cache_control(max_age=0, no_cache=True, no_store=True, must_revalidate=True)
+def page_not_found_view(request, exception):
+    return render(request, '404.html', status=404),
+
+@cache_control(max_age=0, no_cache=True, no_store=True, must_revalidate=True)
+def internal_server_error(request, *args, **kwargs):
+    return render(request, '500.html', status=500),

@@ -3,6 +3,9 @@
 {% block topPage %}
 <a class="navbar-brand" href=" {% url 'index' %}">H</a>
 {% endblock %}
+{% block title %}
+<div class="masthead-subheading">Especialidades</div>
+{% endblock %}
 {% block changingContent %}
 {% for especialidad in especialidades %}
 <li>{{especialidad}}</li>
@@ -10,4 +13,9 @@
     <a href="{% url 'especialidad_detalle' especialidad.id %}">Información</a>
 </button>
 {% endfor %}
+<br>
+<br>
+<button>
+    <a href="{% url 'EspecialidadAgregar' %}">Crear</a>
+</button>
 {% endblock %}

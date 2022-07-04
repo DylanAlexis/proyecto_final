@@ -3,6 +3,9 @@
 {% block topPage %}
 <a class="navbar-brand" href=" {% url 'index' %}">H</a>
 {% endblock %}
+{% block title %}
+<div class="masthead-subheading">Profesionales</div>
+{% endblock %}
 {% block changingContent %}
 <form action="{% url 'ProfesionalEditar' matrícula %}" method="POST">{% csrf_token %}
     <table>
