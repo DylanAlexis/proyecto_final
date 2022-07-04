@@ -1,0 +1,20 @@
+{% extends 'appHospital/padre.html' %}
+{% load static %}
+{% block topPage %}
+<a class="navbar-brand" href=" {% url 'index' %}">H</a>
+{% endblock %}
+{% block changingContent %}
+<p>Nombre: {{hospital.nombre}}</p>
+<p>Zona: {{hospital.zona}}</p>
+<p>Tipo:
+{% if hospital.public == True %}
+    Público
+{% else %}
+    Privado
+{% endif %}
+</p>
+<br>
+<br>
+    <a href="{% url 'Hospital' %}">Volver</a>
+</p>
+{% endblock %}

@@ -1,4 +1,4 @@
-{% extends 'appHospital/Padre.html' %}
+{% extends 'appHospital/padre.html' %}
 {% load static %}
 {% block topPage %}
 <a class="navbar-brand" href=" {% url 'index' %}">H</a>
@@ -6,4 +6,8 @@
 {% block changingContent %}
 <h2>{{blog.titulo}}</h2>
 <p>{{blog.contenido}}</p>
+<br>
+<p>
+    <a href="{% url 'paginas' %}">Volver</a>
+</p>
 {% endblock %}

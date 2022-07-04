@@ -4,10 +4,9 @@
 <a class="navbar-brand" href=" {% url 'index' %}">H</a>
 {% endblock %}
 {% block changingContent %}
-<form action="{% url 'EditarPerfil' %}" method="POST">{% csrf_token %}
-    <table>
-    {{formulario.as_table}}
-    </table>
-<input type="submit" value="GUARDAR">
-</form>
+<p>Especialidad: {{especialidad.nombre}}</p>
+<br>
+<br>
+    <a href="{% url 'Especialidad' %}">Volver</a>
+</p>
 {% endblock %}

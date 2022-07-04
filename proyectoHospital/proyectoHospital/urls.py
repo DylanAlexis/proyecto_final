@@ -14,22 +14,24 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
+from django.contrib.auth.views import LogoutView
+from django.conf.urls import handler404
 from appHospital.views import (
-    Pagina, PaginaDetalle, ProfesionalCrear, ProfesionalDetalle, ProfesionalEdicion,
-    ProfesionalEliminar, ProfesionalList, editarPerfil, especialidad, especialidadAgregar,
-    hospitalLeer, index, login_request, profesionalBuscar, profesionalBuscarResultado, profesionalEditar,
+    Error404, Pagina, PaginaDetalle, HospitalDetalle, EspecialidadDetalle, ProfesionalCrear, ProfesionalDetalle, ProfesionalEdicion,
+    ProfesionalEliminar, ProfesionalList, editarPerfil, especialidadLeer, especialidadAgregar,
+    hospitalLeer, index, about, login_request, profesionalBuscar, profesionalBuscarResultado, profesionalEditar,
     profesionalEliminar, profesionalLeer, register_request
 )
-from django.contrib.auth.views import LogoutView
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
+    path('about', about, name='about'),
     path('hospital/', hospitalLeer, name='Hospital'),
-    path('especialidad/', especialidad, name='Especialidad'),
     path('profesional/', profesionalLeer, name='Profesional'),
+    path('especialidad/', especialidadLeer, name='Especialidad'),
     path('especialidadAgregar/', especialidadAgregar, name='EspecialidadAgregar'),
     path('profesionalBuscar/', profesionalBuscar, name='ProfesionalBuscar'),
     path('profesionalBuscarResultado/', profesionalBuscarResultado, name='ProfesionalBuscarResultado'),
@@ -38,6 +40,8 @@ urlpatterns = [
 
     path('profesional/list/', ProfesionalList.as_view(), name='profesional_list'),
     path('profesional/<pk>', ProfesionalDetalle.as_view(), name='profesional_detalle'),
+    path('hospital/<pk>', HospitalDetalle.as_view(), name='hospital_detalle'),
+    path('especialidad/<pk>', EspecialidadDetalle.as_view(), name='especialidad_detalle'),
     path('profesional/nuevo/', ProfesionalCrear.as_view(), name='profesional_crear'),
     path('profesional/edicion/<pk>', ProfesionalEdicion.as_view(), name='profesional_edicion'),
     path('profesional/borrar/<pk>', ProfesionalEliminar.as_view(), name='profesional_eliminar'),
@@ -47,7 +51,9 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(template_name='logout.html'), name='logout'),
     path('editarPerfil/', editarPerfil, name='EditarPerfil'),
 
-    path('paginas/', Pagina.as_view(), name='Paginas'),
+    path('paginas/', Pagina.as_view(), name='paginas'),
     path('paginas/<slug>/', PaginaDetalle.as_view(), name='pagina_detalle'),
 
 ]
+
+handler404 = Error404.as_view()

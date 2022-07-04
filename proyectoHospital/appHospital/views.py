@@ -6,11 +6,14 @@ from .models import Blog, Especialidad, Hospital, Profesional
 from .forms import EspecialidadAgregar, ProfesionalEditar, UserEditForm, UserRegistrationForm
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth import login, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 def index(request):
     return render(request, 'index.html')
+
+def about(request):
+    return render(request, 'about.html')
 
 def hospital(request):
     hospital_list = Hospital.objects.all()
@@ -54,6 +57,11 @@ def hospitalLeer(request):
     contexto = {'hospitales':hospitales}
     return render(request, 'hospital.html', contexto)
 
+def especialidadLeer(request):
+    especialidades = Especialidad.objects.all()
+    contexto = {'especialidades':especialidades}
+    return render(request, 'especialidad.html', contexto)
+
 def profesionalLeer(request):
     profesionales = Profesional.objects.all()
     contexto = {'profesionales':profesionales}
@@ -94,6 +102,16 @@ class ProfesionalDetalle(DetailView):
     model = Profesional
     success_url = reverse_lazy('Profesional')
     fields = ['nombre', 'apellido', 'edad', 'matrícula', 'especialidad', 'hospital']
+
+class HospitalDetalle(DetailView):
+    model = Hospital
+    success_url = reverse_lazy('Hospital')
+    fields = ['nombre', 'zona', 'public']
+
+class EspecialidadDetalle(DetailView):
+    model = Especialidad
+    success_url = reverse_lazy('Especialidad')
+    fields = ['nombre']
 
 class ProfesionalCrear(CreateView):
     model = Profesional
@@ -172,3 +190,6 @@ class PaginaDetalle(DetailView):
         context = super().get_context_data(**kwargs)
         blog = Blog.objects.filter(slug=self.kwargs.get('slug'))
         return context
+
+class Error404(TemplateView):
+    template_name = '404.html'
