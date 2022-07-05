@@ -11,8 +11,15 @@
 <h2>{{blog.titulo}}</h2>
 <p>{{blog.excerpt}}</p>
 <br>
+<button>
 <a href="{% url 'pagina_detalle' slug=blog.slug %}">Leer más</a>
+<a href="{% url 'pagina_edicion' blog.slug %}">Editar</a>
+<a href="{% url 'pagina_eliminar' blog.slug %}">Eliminar</a>
+</button>
 <br>
 <br>
 {% endfor %}
+<button>
+<a href="{% url 'pagina_crear' %}">Crear</a>
+</button>
 {% endblock %}

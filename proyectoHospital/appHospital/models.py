@@ -1,5 +1,6 @@
 from email.policy import default
 from importlib.metadata import requires
+import os
 from django.db import models
 import uuid
 from django.contrib.auth.models import User
@@ -65,10 +66,11 @@ class Blog(models.Model):
     estado = models.CharField(max_length=10, choices=opciones, default='borrador')
     objects = models.Manager()
     blogobjects = BlogObjects()
+    image = models.ImageField(upload_to='img')
 
     class Meta:
         ordering = ('publicado',)
-    
+
     def __str__(self) -> str:
         return self.titulo
 

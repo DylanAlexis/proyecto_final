@@ -1,6 +1,8 @@
+from email import message
 from msilib.schema import ListView
+from pyexpat.errors import messages
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from .models import Blog, Especialidad, Hospital, Profesional
 from .forms import EspecialidadAgregar, ProfesionalEditar, UserEditForm, UserRegistrationForm
@@ -10,12 +12,16 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.decorators.cache import cache_control
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 def index(request):
     return render(request, 'index.html')
 
 def about(request):
     return render(request, 'about.html')
+
+def cuentas(request):
+    return render(request, 'cuentas.html')
 
 def hospital(request):
     hospital_list = Hospital.objects.all()
@@ -95,10 +101,9 @@ def profesionalEditar(request, matrícula):
         contexto = {'miFormulario':miFormulario, 'matrícula':matrícula}
         return render(request, 'profesionalEditar.html', contexto)
 
-class ProfesionalList(LoginRequiredMixin, ListView):
+class ProfesionalList(ListView):
     model = Profesional
     template_name = 'profesional.html'
-
 
 class ProfesionalDetalle(DetailView):
     model = Profesional
@@ -173,7 +178,7 @@ def editarPerfil(request):
             return render(request, 'index.html', {'msg': 'Datos actualizados'})
     else:
         formulario  = UserEditForm(instance=usuario)
-    return render(request, 'editarPerfil.html', {'formulario': formulario, 'usuario': usuario.username})
+    return render(request, 'profile.html', {'formulario': formulario, 'usuario': usuario.username})
 
 class Pagina(TemplateView):
     template_name = 'paginas.html'
@@ -185,13 +190,27 @@ class Pagina(TemplateView):
 
 class PaginaDetalle(DetailView):
     model = Blog
-    template_name = 'pagina_detalle.html'
+    template_name = 'blog_detail.html'
     context_object_name = 'blog'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         blog = Blog.objects.filter(slug=self.kwargs.get('slug'))
         return context
+
+class BlogCrear(CreateView):
+    model = Blog
+    success_url = reverse_lazy('Paginas')
+    fields = ['category', 'titulo', 'subtitulo', 'excerpt', 'contenido', 'estado', 'image']
+
+class BlogEdicion(UpdateView):
+    model = Blog
+    success_url = reverse_lazy('Paginas')
+    fields = ['category', 'titulo', 'subtitulo', 'excerpt', 'contenido', 'estado', 'image']
+
+class BlogEliminar(DeleteView):
+    model = Blog
+    success_url = reverse_lazy('Paginas')
 
 @cache_control(max_age=0, no_cache=True, no_store=True, must_revalidate=True)
 def page_not_found_view(request, exception):

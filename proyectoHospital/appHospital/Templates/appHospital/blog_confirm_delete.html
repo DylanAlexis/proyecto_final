@@ -1,0 +1,13 @@
+{% extends 'appHospital/padre.html' %}
+{% load static %}
+{% block topPage %}
+<a class="navbar-brand" href=" {% url 'index' %}">H</a>
+{% endblock %}
+{% block title %}
+<div class="masthead-subheading">Eliminar</div>
+{% endblock %}
+{% block changingContent %}
+<form method="POST">{% csrf_token %}
+    ¿Estás seguro de eliminar el blog?
+<input type="submit" value="SÍ">
+{% endblock %}

@@ -36,6 +36,7 @@
                         <li class="nav-item"><a class="nav-link" href="{% url 'Profesional' %}">Profesionales</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'paginas' %}">Páginas</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'cuentas' %}">Cuentas</a></li>
                     </ul>
                 </div>
             </div>
@@ -45,10 +46,6 @@
             <div class="container">
                 {% block title %}
                 <div class="masthead-subheading">BIENVENIDO</div>
-                <a class="btn btn-primary btn-xl text-uppercase" href="{% url 'login' %}">LOGIN</a>
-                <a class="btn btn-primary btn-xl text-uppercase" href="{% url 'register' %}">REGISTRARSE</a>
-                <a class="btn btn-primary btn-xl text-uppercase" href="{% url 'EditarPerfil' %}">EDITAR PERFÍL</a>
-                <a class="btn btn-primary btn-xl text-uppercase" href="{% url 'logout' %}">LOGOUT</a>
                 {% endblock %}
             </div>
         </header>

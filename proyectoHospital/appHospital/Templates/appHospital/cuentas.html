@@ -1,0 +1,14 @@
+{% extends 'appHospital/padre.html' %}
+{% load static %}
+{% block topPage %}
+<a class="navbar-brand" href=" {% url 'index' %}">H</a>
+{% endblock %}
+{% block title %}
+<div class="masthead-subheading">Cuentas</div>
+{% endblock %}
+{% block changingContent %}
+<a class="btn btn-primary btn-xl text-uppercase" href="{% url 'login' %}">LOGIN</a>
+<a class="btn btn-primary btn-xl text-uppercase" href="{% url 'register' %}">REGISTRARSE</a>
+<a class="btn btn-primary btn-xl text-uppercase" href="{% url 'EditarPerfil' %}">EDITAR PERFÍL</a>
+<a class="btn btn-primary btn-xl text-uppercase" href="{% url 'logout' %}">LOGOUT</a>
+{% endblock %}
