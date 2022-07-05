@@ -21,6 +21,7 @@ class Hospital(models.Model):
 class Especialidad(models.Model):
     id = models.CharField(max_length=40, default=uuid.uuid4(), primary_key=True)
     nombre = models.CharField(max_length=20)
+    descripcion = models.TextField(blank=True)
 
     def __str__(self) -> str:
         return self.nombre
